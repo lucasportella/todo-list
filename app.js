@@ -1,3 +1,7 @@
 const express = require('express');
 
-express.json();
+const app = express();
+
+app.use(express.json());
+
+module.exports = app;
