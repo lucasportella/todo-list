@@ -1,5 +1,8 @@
-const getTasks = () => {
-    return 'test msc function'
+const connection = require('./connection');
+
+const getTasks = async () => {
+  const db = await connection();
+  return db.collection('tasks').find().toArray();
 };
 
 module.exports = {
