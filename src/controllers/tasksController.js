@@ -1,8 +1,8 @@
 const { StatusCodes } = require('http-status-codes');
-const tasksModel = require('../models/tasksModel');
+const tasksService = require('../services/tasksService');
 
 const getTasks = async (req, res) => {
-  const result = await tasksModel.getTasks();
+  const result = await tasksService.getTasks();
   res.status(StatusCodes.OK).json(result);
 };
 
