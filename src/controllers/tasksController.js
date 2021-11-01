@@ -11,12 +11,22 @@ const addTask = async (req, res) => {
   const payload = { name, status };
   const result = await tasksService.addTask(payload);
   if (result.error) {
-    return res.status(StatusCodes.BAD_REQUEST).json(result.error.message);
+    return res.status(StatusCodes.BAD_REQUEST).json(result);
   }
   return res.status(StatusCodes.CREATED).json(result);
+};
+
+const removeTask = async (req, res) => {
+  const { id } = req.body;
+  const result = await tasksService.removeTask(id);
+  if (result.error) {
+    return res.status(StatusCodes.BAD_REQUEST).json(result);
+  }
+  return res.status(StatusCodes.OK).json(result);
 };
 
 module.exports = {
   getTasks,
   addTask,
+  removeTask,
 };
