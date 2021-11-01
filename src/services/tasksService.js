@@ -18,8 +18,17 @@ const removeTask = async (id) => {
   return { error: { errorType: 'remove task failed', message: 'it was not possible to remove the selected task in the database' } };
 };
 
+const editTask = async (payload) => {
+  const result = await tasksModel.editTask(payload);
+  if (result.modifiedCount === 1) {
+    return result;
+  }
+  return { error: { errorType: 'edit task failed', message: 'it was not possible to edit the selected task in the database' } };
+};
+
 module.exports = {
   getTasks,
   addTask,
   removeTask,
+  editTask,
 };
