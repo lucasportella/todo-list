@@ -18,9 +18,16 @@ const removeTask = async (id) => {
 };
 
 const editTask = async (payload) => {
-  const { id, status } = payload;
   const db = await connection();
+  const { id, status } = payload;
   return db.collection('tasks').updateOne({ _id: ObjectId(id) }, { $set: { status } });
+};
+
+const getSortedTasks = async (payload) => {
+  const db = await connection();
+  const { query, sortOrder } = payload;
+  const result = await db.collection('tasks').find().sort({ [query]: sortOrder }).toArray();
+  return result;
 };
 
 module.exports = {
@@ -28,4 +35,5 @@ module.exports = {
   addTask,
   removeTask,
   editTask,
+  getSortedTasks,
 };

@@ -32,9 +32,18 @@ const editTask = async (req, res) => {
   return res.status(StatusCodes.OK).json(result);
 };
 
+const getSortedTasks = async (req, res) => {
+  const query = req.query.q;
+  const sortOrder = Number(req.query.o);
+  const payload = { query, sortOrder };
+  const result = await tasksService.getSortedTasks(payload);
+  return res.status(StatusCodes.OK).json(result);
+};
+
 module.exports = {
   getTasks,
   addTask,
   removeTask,
   editTask,
+  getSortedTasks,
 };

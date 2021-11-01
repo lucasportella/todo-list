@@ -26,9 +26,12 @@ const editTask = async (payload) => {
   return { error: { errorType: 'edit task failed', message: 'it was not possible to edit the selected task in the database' } };
 };
 
+const getSortedTasks = (payload) => tasksModel.getSortedTasks(payload);
+
 module.exports = {
   getTasks,
   addTask,
   removeTask,
   editTask,
+  getSortedTasks,
 };
