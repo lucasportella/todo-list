@@ -5,6 +5,13 @@ const getTasks = async () => {
   return db.collection('tasks').find().toArray();
 };
 
+const addTask = async (payload) => {
+  const db = await connection();
+  const result = await db.collection('tasks').insertOne({ ...payload, date: new Date() });
+  return result;
+};
+
 module.exports = {
   getTasks,
+  addTask,
 };
