@@ -1,5 +1,5 @@
 import React from 'react';
 
-const Sort = () => <div><button type="button">Sort</button></div>;
+const Sort = () => <span><button type="button">Sort</button></span>;
 
 export default Sort;
