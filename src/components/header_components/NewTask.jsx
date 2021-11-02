@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { postTask } from '../../API/fetchAPI';
+import { getTasks, postTask } from '../../API/fetchAPI';
 import TasksContext from '../../context/TasksContext';
 
 const NewTask = () => {
@@ -16,8 +16,9 @@ const NewTask = () => {
 
   const handleClickAndSubmit = async () => {
     const taskCreated = await postTask(newTask);
-
     setNewTaskMode(!newTaskMode);
+    const fetchTasks = await getTasks();
+    setTasks(fetchTasks);
 
     if (taskCreated) {
       setAlertMessage('New task created!');

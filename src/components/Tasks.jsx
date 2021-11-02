@@ -1,15 +1,13 @@
 import React, { useEffect, useContext } from 'react';
 import { getTasks } from '../API/fetchAPI';
-import removeUnderscore from '../utils/removeUnderscore';
 import TasksContext from '../context/TasksContext';
 
 const Tasks = () => {
   const { tasks, setTasks } = useContext(TasksContext);
 
   useEffect(async () => {
-    const fetch = await getTasks();
-    const parsedData = removeUnderscore(fetch.data);
-    setTasks(parsedData);
+    const fetchTasks = await getTasks();
+    setTasks(fetchTasks);
   }, []);
 
   const generateTasks = () => tasks.map((task) => (
