@@ -1,8 +1,14 @@
 import React from 'react';
 import './App.css';
 import Tasks from './components/Tasks';
+import Header from './components/Header';
 
-const App = () => (<Tasks />);
+const App = () => (
+  <div>
+    <Header />
+    <Tasks />
+  </div>
+);
 
 export default App;
 
