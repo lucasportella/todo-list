@@ -2,15 +2,21 @@ import React, { useState } from 'react';
 
 const NewTask = () => {
   const [newTaskMode, setNewTaskMode] = useState(false);
+  const [newTask, setNewTask] = useState({ status: 'pending', text: '' });
 
   const handleClick = () => setNewTaskMode(!newTaskMode);
 
+  const handleChange = ({ target: { name, value } }) => {
+    setNewTask({ ...newTask, [name]: value });
+  };
+
   const handleClickAndSubmit = () => {
+    // api call func goes here
     setNewTaskMode(!newTaskMode);
   };
 
   const renderNewTaskButton = () => (
-    <span><button type="button" onClick={() => handleClick()}>New Task</button></span>
+    <span><button type="button" onClick={handleClick}>New Task</button></span>
   );
 
   const renderNewTaskMode = () => (
@@ -18,25 +24,25 @@ const NewTask = () => {
       <div>
         <label htmlFor="task-text">
           Task text:
-          <input id="task-text" />
+          <input onChange={handleChange} name="text" id="task-text" />
         </label>
       </div>
       <div>
         Task status:
-        <select name="status" id="dropdown-status">
+        <select onChange={handleChange} name="status" id="dropdown-status">
           <option value="pending">Pending</option>
           <option value="in progress">In progress</option>
           <option value="done">Done</option>
         </select>
       </div>
       <span>
-        <button type="button" onClick={() => handleClickAndSubmit()}>Confirm</button>
-        <button type="button" onClick={() => handleClick()}>Cancel</button>
+        <button type="button" onClick={handleClickAndSubmit}>Confirm</button>
+        <button type="button" onClick={handleClick}>Cancel</button>
       </span>
     </form>
   );
 
-  return newTaskMode ? renderNewTaskButton() : renderNewTaskMode();
+  return newTaskMode ? renderNewTaskMode() : renderNewTaskButton();
 };
 
 export default NewTask;
