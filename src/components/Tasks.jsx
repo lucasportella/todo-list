@@ -4,7 +4,6 @@ import removeUnderscore from '../utils/removeUnderscore';
 
 const Tasks = () => {
   const [tasks, setTasks] = useState();
-  console.log(tasks);
 
   useEffect(async () => {
     const fetch = await getTasks();

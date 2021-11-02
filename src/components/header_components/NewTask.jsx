@@ -4,6 +4,7 @@ import { postTask } from '../../API/fetchAPI';
 const NewTask = () => {
   const [newTaskMode, setNewTaskMode] = useState(false);
   const [newTask, setNewTask] = useState({ status: 'pending', text: '' });
+  const [alertMessage, setAlertMessage] = useState('');
 
   const handleClick = () => setNewTaskMode(!newTaskMode);
 
@@ -12,8 +13,17 @@ const NewTask = () => {
   };
 
   const handleClickAndSubmit = async () => {
-    await postTask(newTask);
+    const taskCreated = await postTask(newTask);
+
     setNewTaskMode(!newTaskMode);
+
+    if (taskCreated) {
+      setAlertMessage('New task created!');
+    } else { setAlertMessage('Failed to create new task.'); }
+
+    setTimeout(() => {
+      setAlertMessage('');
+    }, 4000);
   };
 
   const renderNewTaskButton = () => (
@@ -21,6 +31,7 @@ const NewTask = () => {
   );
 
   const renderNewTaskMode = () => (
+
     <form>
       <div>
         <label htmlFor="task-text">
@@ -41,9 +52,15 @@ const NewTask = () => {
         <button type="button" onClick={handleClick}>Cancel</button>
       </span>
     </form>
+
   );
 
-  return newTaskMode ? renderNewTaskMode() : renderNewTaskButton();
+  return (
+    <div>
+      <div>{alertMessage}</div>
+      {newTaskMode ? renderNewTaskMode() : renderNewTaskButton()}
+    </div>
+  );
 };
 
 export default NewTask;
