@@ -15,6 +15,19 @@ const NewTask = () => {
 
   const renderNewTaskMode = () => (
     <form>
+      <div>
+        <label htmlFor="task-text">
+          Task text:
+          <input id="task-text" />
+        </label>
+      </div>
+      <div>
+        <label htmlFor="task-status">
+          Task status:
+          <input id="task-status" />
+        </label>
+
+      </div>
       <span>
         <button type="button" onClick={() => handleClickAndSubmit()}>Confirm</button>
         <button type="button" onClick={() => handleClick()}>Cancel</button>
