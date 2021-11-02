@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { postTask } from '../../API/fetchAPI';
 
 const NewTask = () => {
   const [newTaskMode, setNewTaskMode] = useState(false);
@@ -10,8 +11,8 @@ const NewTask = () => {
     setNewTask({ ...newTask, [name]: value });
   };
 
-  const handleClickAndSubmit = () => {
-    // api call func goes here
+  const handleClickAndSubmit = async () => {
+    await postTask(newTask);
     setNewTaskMode(!newTaskMode);
   };
 

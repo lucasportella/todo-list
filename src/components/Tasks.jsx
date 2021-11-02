@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import getTasks from '../API/fetchAPI';
+import { getTasks } from '../API/fetchAPI';
 import removeUnderscore from '../utils/removeUnderscore';
 
 const Tasks = () => {
   const [tasks, setTasks] = useState();
+  console.log(tasks);
 
   useEffect(async () => {
     const fetch = await getTasks();
@@ -13,7 +14,7 @@ const Tasks = () => {
 
   const generateTasks = () => tasks.map((task) => (
     <div key={task.id}>
-      <div>{task.name}</div>
+      <div>{task.text}</div>
       <div>{task.date}</div>
       <div>{task.status}</div>
     </div>

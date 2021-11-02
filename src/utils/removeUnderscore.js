@@ -1,10 +1,10 @@
 const removeUnderscore = (data) => data.map((task) => {
   const {
-    _id, name, date, status,
+    _id, text, date, status,
   } = task;
   return {
     id: _id,
-    name,
+    text,
     date,
     status,
   };
