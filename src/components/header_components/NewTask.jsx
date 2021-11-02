@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { postTask } from '../../API/fetchAPI';
+import TasksContext from '../../context/TasksContext';
 
 const NewTask = () => {
+  const { setTasks } = useContext(TasksContext);
   const [newTaskMode, setNewTaskMode] = useState(false);
   const [newTask, setNewTask] = useState({ status: 'pending', text: '' });
   const [alertMessage, setAlertMessage] = useState('');
