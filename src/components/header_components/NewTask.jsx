@@ -22,11 +22,12 @@ const NewTask = () => {
         </label>
       </div>
       <div>
-        <label htmlFor="task-status">
-          Task status:
-          <input id="task-status" />
-        </label>
-
+        Task status:
+        <select name="status" id="dropdown-status">
+          <option value="pending">Pending</option>
+          <option value="in progress">In progress</option>
+          <option value="done">Done</option>
+        </select>
       </div>
       <span>
         <button type="button" onClick={() => handleClickAndSubmit()}>Confirm</button>
