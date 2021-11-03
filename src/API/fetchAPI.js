@@ -24,4 +24,15 @@ const removeTask = async (id) => {
   return false;
 };
 
-export { getTasks, postTask, removeTask };
+// different pattern for the put function due to ambiguity
+const fetchEditTask = async (editedTask) => {
+  const result = await axios.put(baseEndPoint, editedTask);
+  if (result.status === 200) {
+    return true;
+  }
+  return false;
+};
+
+export {
+  getTasks, postTask, removeTask, fetchEditTask,
+};

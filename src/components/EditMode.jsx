@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import TasksContext from '../context/TasksContext';
+import { fetchEditTask } from '../API/fetchAPI';
 
 const EditMode = (props) => {
   const {
@@ -8,43 +9,56 @@ const EditMode = (props) => {
       id, text, status,
     },
   } = props;
-  const { editModeTasks, setEditModeTasks } = useContext(TasksContext);
-  const [editTask, setEditTask] = useState({ status, text });
+  const {
+    updateTasks, setAlertMessage, editModeTasks, setEditModeTasks,
+  } = useContext(TasksContext);
+  const [editTask, setEditTask] = useState({ id, text, status });
 
   const handleChange = ({ target: { name, value } }) => {
     setEditTask({ ...editTask, [name]: value });
   };
 
-  const cancelEdit = () => {
+  const removeTaskFromEditMode = () => {
     const updatedEditModeTasks = editModeTasks.filter((taskId) => taskId !== id);
     setEditModeTasks(updatedEditModeTasks);
   };
 
-  const confirmEdit = () => {
+  const cancelEdit = () => {
+    removeTaskFromEditMode();
+  };
 
+  const confirmEdit = async () => {
+    const taskEdited = await fetchEditTask(editTask);
+    if (taskEdited) {
+      setAlertMessage('Task edited!');
+      await updateTasks();
+    } else { setAlertMessage('Failed to edit task.'); }
+    removeTaskFromEditMode();
   };
 
   return (
-    <form>
-      <div>
-        <label htmlFor="task-text">
-          Task text:
-          <input onChange={handleChange} name="text" id="task-text" value={editTask.text} />
-        </label>
-      </div>
-      <div>
-        Task status:
-        <select onChange={handleChange} name="status" id="dropdown-status" value={editTask.status}>
-          <option value="pending">Pending</option>
-          <option value="in progress">In progress</option>
-          <option value="done">Done</option>
-        </select>
-      </div>
-      <span>
-        <button type="button" onClick={confirmEdit}>Confirm</button>
-        <button type="button" onClick={cancelEdit}>Cancel</button>
-      </span>
-    </form>
+    <div key={id}>
+      <form>
+        <div>
+          <label htmlFor="task-text">
+            Task text:
+            <input onChange={handleChange} name="text" id="task-text" value={editTask.text} />
+          </label>
+        </div>
+        <div>
+          Task status:
+          <select onChange={handleChange} name="status" id="dropdown-status" value={editTask.status}>
+            <option value="pending">Pending</option>
+            <option value="in progress">In progress</option>
+            <option value="done">Done</option>
+          </select>
+        </div>
+        <span>
+          <button type="button" onClick={confirmEdit}>Confirm</button>
+          <button type="button" onClick={cancelEdit}>Cancel</button>
+        </span>
+      </form>
+    </div>
   );
 };
 
