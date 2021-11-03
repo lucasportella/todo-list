@@ -5,6 +5,7 @@ import { getTasks } from '../API/fetchAPI';
 
 const TasksProvider = ({ children }) => {
   const [tasks, setTasks] = useState();
+  const [editModeTasks, setEditModeTasks] = useState([]);
   const [alertMessage, setAlertMessage] = useState('');
 
   const updateTasks = async () => {
@@ -16,6 +17,8 @@ const TasksProvider = ({ children }) => {
     updateTasks,
     tasks,
     setTasks,
+    editModeTasks,
+    setEditModeTasks,
     alertMessage,
     setAlertMessage,
   };

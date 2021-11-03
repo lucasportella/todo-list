@@ -1,12 +1,12 @@
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { removeTask } from '../API/fetchAPI';
 import TasksContext from '../context/TasksContext';
+import EditMode from './EditMode';
 
 const Tasks = () => {
   const {
-    updateTasks, tasks, alertMessage, setAlertMessage,
+    updateTasks, tasks, alertMessage, setAlertMessage, editModeTasks, setEditModeTasks,
   } = useContext(TasksContext);
-  const [editModeTasks, setEditModeTasks] = useState([]);
 
   useEffect(async () => {
     await updateTasks();
@@ -39,7 +39,7 @@ const Tasks = () => {
   );
 
   const generateTasks = () => tasks.map((task) => (editModeTasks.includes(task.id)
-    ? <div>edit mode</div> : renderStandardMode(task)));
+    ? <EditMode data={task} /> : renderStandardMode(task)));
 
   return (
     <div>
