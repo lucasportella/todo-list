@@ -19,8 +19,8 @@ const removeTask = async (id) => {
 
 const editTask = async (payload) => {
   const db = await connection();
-  const { id, status } = payload;
-  return db.collection('tasks').updateOne({ _id: ObjectId(id) }, { $set: { status } });
+  const { id, text, status } = payload;
+  return db.collection('tasks').updateOne({ _id: ObjectId(id) }, { $set: { text, status } });
 };
 
 const getSortedTasks = async (payload) => {
