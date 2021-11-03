@@ -29,12 +29,12 @@ const EditMode = (props) => {
       <div>
         <label htmlFor="task-text">
           Task text:
-          <input onChange={handleChange} name="text" id="task-text" value={text} />
+          <input onChange={handleChange} name="text" id="task-text" value={editTask.text} />
         </label>
       </div>
       <div>
         Task status:
-        <select onChange={handleChange} name="status" id="dropdown-status" value={status}>
+        <select onChange={handleChange} name="status" id="dropdown-status" value={editTask.status}>
           <option value="pending">Pending</option>
           <option value="in progress">In progress</option>
           <option value="done">Done</option>
