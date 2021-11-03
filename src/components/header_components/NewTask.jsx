@@ -3,7 +3,7 @@ import { postTask } from '../../API/fetchAPI';
 import TasksContext from '../../context/TasksContext';
 
 const NewTask = () => {
-  const { updateTasks, setAlertMessage } = useContext(TasksContext);
+  const { updateTasks, setAlertMessage, alertMessageReset } = useContext(TasksContext);
   const [newTaskMode, setNewTaskMode] = useState(false);
   const [newTask, setNewTask] = useState({ status: 'pending', text: '' });
 
@@ -22,11 +22,8 @@ const NewTask = () => {
       setAlertMessage('Failed to create new task.');
     } finally {
       setNewTaskMode(!newTaskMode);
+      alertMessageReset();
     }
-
-    setTimeout(() => {
-      setAlertMessage('');
-    }, 4000);
   };
 
   const renderNewTaskButton = () => (

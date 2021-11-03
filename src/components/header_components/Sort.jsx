@@ -1,30 +1,74 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { endpointTransporter } from '../../API/fetchAPI';
 import TasksContext from '../../context/TasksContext';
 
 const Sort = () => {
-  const { updateTasks } = useContext(TasksContext);
-  const handleChange = async ({ target: { value } }) => {
-    if (value === 'default') {
-      endpointTransporter('');
-      await updateTasks();
-    } else {
-      endpointTransporter(`sort/?q=${value}&o=1`);
-      await updateTasks();
-    }
+  const { updateTasks, setAlertMessage, alertMessageReset } = useContext(TasksContext);
+  const [sortMode, setSortMode] = useState(false);
+  const [sortMethod, setSortMethod] = useState('date');
+  const [sortOrder, setSortOrder] = useState('1');
+
+  const handleSortMode = () => setSortMode(!sortMode);
+
+  const handleSortMethod = async ({ target: { value } }) => {
+    setSortMethod(value);
   };
 
-  return (
+  const handleSortOrder = async ({ target: { value } }) => {
+    setSortOrder(value);
+  };
+
+  const handleSort = async () => {
+    endpointTransporter(`sort/?q=${sortMethod}&o=${sortOrder}`);
+    await updateTasks();
+    handleSortMode();
+    setAlertMessage('Sorted!');
+    alertMessageReset();
+  };
+
+  const renderSortButton = () => (<div><button type="button" onClick={handleSortMode}>Sort</button></div>);
+
+  const renderSortMode = () => (
     <div>
-      Sort:
       <form>
-        <select onChange={handleChange} name="sort-method">
+        <select defaultValue={sortMethod} onChange={handleSortMethod} name="sort-method">
           <option value="text">Text</option>
           <option value="date">Date</option>
           <option value="status">Status</option>
-          <option value="default">Default</option>
         </select>
       </form>
+      <form>
+        <label htmlFor="asc-sort-order">
+          Asc
+          <input
+            onClick={handleSortOrder}
+            type="radio"
+            value="1"
+            defaultChecked={sortOrder === '1'}
+            name="sort-order"
+            id="asc-sort-order"
+          />
+        </label>
+        <label htmlFor="desc-sort-order">
+          Desc
+          <input
+            onClick={handleSortOrder}
+            type="radio"
+            value="-1"
+            defaultChecked={sortOrder === '-1'}
+            name="sort-order"
+            id="desc-sort-order"
+          />
+        </label>
+        <button type="button" onClick={handleSort}>Sort</button>
+        <button type="button" onClick={handleSortMode}>Cancel</button>
+      </form>
+    </div>
+  );
+
+  return (
+    <div>
+      {sortMode ? renderSortMode() : renderSortButton()}
     </div>
   );
 };
