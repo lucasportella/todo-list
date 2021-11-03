@@ -23,10 +23,12 @@ const editTask = async (payload) => {
   return db.collection('tasks').updateOne({ _id: ObjectId(id) }, { $set: { text, status } });
 };
 
+// sorting case insensitive https://stackoverflow.com/questions/22931177/case-insensitive-sorting-in-mongodb
 const getSortedTasks = async (payload) => {
   const db = await connection();
   const { query, sortOrder } = payload;
-  const result = await db.collection('tasks').find().sort({ [query]: sortOrder }).toArray();
+  const result = await db.collection('tasks').find().collation({ locale: 'en' }).sort({ [query]: sortOrder })
+    .toArray();
   return result;
 };
 
