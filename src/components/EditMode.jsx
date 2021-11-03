@@ -9,9 +9,11 @@ const EditMode = (props) => {
       id, text, status,
     },
   } = props;
+
   const {
-    updateTasks, setAlertMessage, editModeTasks, setEditModeTasks,
+    updateTasks, setAlertMessage, alertMessageReset, editModeTasks, setEditModeTasks,
   } = useContext(TasksContext);
+
   const [editTask, setEditTask] = useState({ id, text, status });
 
   const handleChange = ({ target: { name, value } }) => {
@@ -28,37 +30,39 @@ const EditMode = (props) => {
   };
 
   const confirmEdit = async () => {
-    const taskEdited = await fetchEditTask(editTask);
-    if (taskEdited) {
+    try {
+      await fetchEditTask(editTask);
       setAlertMessage('Task edited!');
       await updateTasks();
-    } else { setAlertMessage('Failed to edit task.'); }
-    removeTaskFromEditMode();
+    } catch (error) {
+      setAlertMessage('Failed to edit task.');
+    } finally {
+      alertMessageReset();
+      removeTaskFromEditMode();
+    }
   };
 
   return (
-    <div key={id}>
-      <form>
-        <div>
-          <label htmlFor="task-text">
-            Task text:
-            <input onChange={handleChange} name="text" id="task-text" value={editTask.text} />
-          </label>
-        </div>
-        <div>
-          Task status:
-          <select onChange={handleChange} name="status" id="dropdown-status" value={editTask.status}>
-            <option value="pending">Pending</option>
-            <option value="in progress">In progress</option>
-            <option value="done">Done</option>
-          </select>
-        </div>
-        <span>
-          <button type="button" onClick={confirmEdit}>Confirm</button>
-          <button type="button" onClick={cancelEdit}>Cancel</button>
-        </span>
-      </form>
-    </div>
+    <form>
+      <div>
+        <label htmlFor="task-text">
+          Task text:
+          <input onChange={handleChange} name="text" id="task-text" value={editTask.text} />
+        </label>
+      </div>
+      <div>
+        Task status:
+        <select onChange={handleChange} name="status" id="dropdown-status" value={editTask.status}>
+          <option value="pending">Pending</option>
+          <option value="in progress">In progress</option>
+          <option value="done">Done</option>
+        </select>
+      </div>
+      <span>
+        <button type="button" onClick={confirmEdit}>Confirm</button>
+        <button type="button" onClick={cancelEdit}>Cancel</button>
+      </span>
+    </form>
   );
 };
 

@@ -13,6 +13,12 @@ const TasksProvider = ({ children }) => {
     setTasks(fetchTasks);
   };
 
+  const alertMessageReset = () => {
+    setTimeout(() => {
+      setAlertMessage('');
+    }, 4000);
+  };
+
   const contextValue = {
     updateTasks,
     tasks,
@@ -21,6 +27,7 @@ const TasksProvider = ({ children }) => {
     setEditModeTasks,
     alertMessage,
     setAlertMessage,
+    alertMessageReset,
   };
 
   return (

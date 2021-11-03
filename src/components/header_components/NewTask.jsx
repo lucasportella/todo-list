@@ -14,13 +14,15 @@ const NewTask = () => {
   };
 
   const handleClickAndSubmit = async () => {
-    const taskCreated = await postTask(newTask);
-    setNewTaskMode(!newTaskMode);
-
-    if (taskCreated) {
+    try {
+      await postTask(newTask);
       setAlertMessage('New task created!');
       await updateTasks();
-    } else { setAlertMessage('Failed to create new task.'); }
+    } catch (error) {
+      setAlertMessage('Failed to create new task.');
+    } finally {
+      setNewTaskMode(!newTaskMode);
+    }
 
     setTimeout(() => {
       setAlertMessage('');

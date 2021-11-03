@@ -5,7 +5,13 @@ import EditMode from './EditMode';
 
 const Tasks = () => {
   const {
-    updateTasks, tasks, alertMessage, setAlertMessage, editModeTasks, setEditModeTasks,
+    updateTasks,
+    tasks,
+    alertMessage,
+    setAlertMessage,
+    alertMessageReset,
+    editModeTasks,
+    setEditModeTasks,
   } = useContext(TasksContext);
 
   useEffect(async () => {
@@ -13,15 +19,15 @@ const Tasks = () => {
   }, []);
 
   const handleDelete = async (id) => {
-    const taskRemoved = await removeTask(id);
-    if (taskRemoved) {
+    try {
+      await removeTask(id);
       setAlertMessage('Task removed!');
       await updateTasks();
-    } else { setAlertMessage('Failed to remove task.'); }
-
-    setTimeout(() => {
-      setAlertMessage('');
-    }, 4000);
+    } catch (error) {
+      setAlertMessage('Failed to remove task.');
+    } finally {
+      alertMessageReset();
+    }
   };
 
   const handleEditMode = (id) => {
@@ -39,7 +45,7 @@ const Tasks = () => {
   );
 
   const generateTasks = () => tasks.map((task) => (editModeTasks.includes(task.id)
-    ? <EditMode data={task} /> : renderStandardMode(task)));
+    ? <EditMode data={task} key={task.id} /> : renderStandardMode(task)));
 
   return (
     <div>
