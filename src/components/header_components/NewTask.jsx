@@ -1,12 +1,11 @@
 import React, { useState, useContext } from 'react';
-import { getTasks, postTask } from '../../API/fetchAPI';
+import { postTask } from '../../API/fetchAPI';
 import TasksContext from '../../context/TasksContext';
 
 const NewTask = () => {
-  const { setTasks } = useContext(TasksContext);
+  const { updateTasks, setAlertMessage } = useContext(TasksContext);
   const [newTaskMode, setNewTaskMode] = useState(false);
   const [newTask, setNewTask] = useState({ status: 'pending', text: '' });
-  const [alertMessage, setAlertMessage] = useState('');
 
   const handleClick = () => setNewTaskMode(!newTaskMode);
 
@@ -17,11 +16,10 @@ const NewTask = () => {
   const handleClickAndSubmit = async () => {
     const taskCreated = await postTask(newTask);
     setNewTaskMode(!newTaskMode);
-    const fetchTasks = await getTasks();
-    setTasks(fetchTasks);
 
     if (taskCreated) {
       setAlertMessage('New task created!');
+      await updateTasks();
     } else { setAlertMessage('Failed to create new task.'); }
 
     setTimeout(() => {
@@ -60,7 +58,6 @@ const NewTask = () => {
 
   return (
     <div>
-      <div>{alertMessage}</div>
       {newTaskMode ? renderNewTaskMode() : renderNewTaskButton()}
     </div>
   );
