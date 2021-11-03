@@ -5,12 +5,12 @@ const OPTIONS = {
   useUnifiedTopology: true,
 };
 
-const MONGO_DB_URL = 'mongodb://127.0.0.1:27017';
+const URI = process.env.MONGODB_URI;
 
 let db = null;
 
 const connection = () => (db ? Promise.resolve(db)
-  : MongoClient.connect(MONGO_DB_URL, OPTIONS).then((conn) => {
+  : MongoClient.connect(URI, OPTIONS).then((conn) => {
     db = conn.db('todo_list');
     return db;
   }));
