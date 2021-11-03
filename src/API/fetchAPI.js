@@ -1,15 +1,21 @@
 import axios from 'axios';
 import removeUnderscore from '../utils/removeUnderscore';
 
-const baseEndPoint = 'http://localhost:3000/tasks/';
+const baseEndpoint = 'http://localhost:3000/tasks/';
+let endpoint = baseEndpoint;
+
+const endpointTransporter = (endpointAttach) => {
+  endpoint = `${baseEndpoint}${endpointAttach}`;
+  console.log(endpoint);
+};
 
 const getTasks = async () => {
-  const result = await axios.get(baseEndPoint);
+  const result = await axios.get(endpoint);
   return removeUnderscore(result.data);
 };
 
 const postTask = async (newTask) => {
-  const result = await axios.post(baseEndPoint, newTask);
+  const result = await axios.post(baseEndpoint, newTask);
   if (result.status === 201) {
     return true;
   }
@@ -17,16 +23,16 @@ const postTask = async (newTask) => {
 };
 
 const removeTask = async (id) => {
-  const result = await axios.delete(baseEndPoint, { data: { id } });
+  const result = await axios.delete(baseEndpoint, { data: { id } });
   if (result.status === 200) {
     return true;
   }
   return false;
 };
 
-// different pattern for the put function due to ambiguity
+// different name pattern for the put function due to ambiguity
 const fetchEditTask = async (editedTask) => {
-  const result = await axios.put(baseEndPoint, editedTask);
+  const result = await axios.put(baseEndpoint, editedTask);
   if (result.status === 200) {
     return true;
   }
@@ -34,5 +40,5 @@ const fetchEditTask = async (editedTask) => {
 };
 
 export {
-  getTasks, postTask, removeTask, fetchEditTask,
+  getTasks, postTask, removeTask, fetchEditTask, endpointTransporter,
 };
