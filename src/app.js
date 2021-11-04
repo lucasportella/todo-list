@@ -8,7 +8,7 @@ app.use(express.json());
 
 // regex pattern in origin to fit cors policy, this allows communication between any localhost ports
 app.use(cors({
-  origin: /http:\/\/localhost:/,
+  origin: '/https://mern-todo-list-backend.herokuapp.com',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
 }));
 
