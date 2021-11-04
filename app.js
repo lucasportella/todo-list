@@ -12,6 +12,6 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
 }));
 
-app.use('/tasks', tasksRoute);
+app.use('/', tasksRoute);
 
 module.exports = app;
