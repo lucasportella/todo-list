@@ -1,7 +1,7 @@
 import axios from 'axios';
 import removeUnderscore from '../utils/removeUnderscore';
 
-const baseEndpoint = 'http://localhost:3000/';
+const baseEndpoint = 'https://mern-todo-list-backend.herokuapp.com/';
 let endpoint = baseEndpoint;
 
 const endpointTransporter = (endpointAttach) => {
