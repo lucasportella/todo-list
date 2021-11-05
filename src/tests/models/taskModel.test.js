@@ -33,8 +33,8 @@ describe('Test taskModel', () => {
     await db.collection('tasks').deleteMany({});
   });
 
-  describe('Get all tasks in the database', () => {
-    it('returns and empty array if the database is empty', async () => {
+  describe('Test getTask function', () => {
+    it('successfully returns and empty array if the database is empty', async () => {
       const response = await tasksModel.getTasks();
       expect(response).to.be.a('array');
       expect(response).to.have.lengthOf(0);
@@ -52,8 +52,8 @@ describe('Test taskModel', () => {
     });
   });
 
-  describe('Adds new task', () => {
-    it('when it is successful', async () => {
+  describe('Test addTask function', () => {
+    it('successfully adds a new task', async () => {
       const task = { name: 'Plant potatoes', status: 'pending' };
       const response = await tasksModel.addTask(task);
       expect(response).to.be.a('object');
