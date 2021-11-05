@@ -24,23 +24,25 @@ describe('Test taskModel', () => {
     await DBServer.stop();
   });
 
-  describe('Test taskModel CRUD', () => {
-    it('adds a new task', async () => {
-      const task = { name: 'Plant potatoes', status: 'pending' };
-      const response = await tasksModel.addTask(task);
-      expect(response).to.be.a('object');
-      expect(response).to.have.all.keys('acknowledged', 'insertedId');
-      expect(response).to.include({ acknowledged: true });
-      expect(response.insertedId).to.be.a('object');
-    });
-
-    it(' is possible to get the new added task', async () => {
+  describe('Get all tasks in the database', () => {
+    it('successfully gets all tasks', async () => {
       const response = await tasksModel.getTasks();
       expect(response).to.be.a('array');
       response.forEach((task) => {
         expect(task).to.be.a('object');
         expect(task).to.have.all.keys('_id', 'name', 'status', 'date');
       });
+    });
+  });
+
+  describe('Adds new task', () => {
+    it('when it is successful', async () => {
+      const task = { name: 'Plant potatoes', status: 'pending' };
+      const response = await tasksModel.addTask(task);
+      expect(response).to.be.a('object');
+      expect(response).to.have.all.keys('acknowledged', 'insertedId');
+      expect(response).to.include({ acknowledged: true });
+      expect(response.insertedId).to.be.a('object');
     });
   });
 });
