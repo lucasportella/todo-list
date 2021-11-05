@@ -1,12 +1,11 @@
 import axios from 'axios';
 import removeUnderscore from '../utils/removeUnderscore';
 
-const baseEndpoint = 'https://mern-todo-list-backend.herokuapp.com/';
+const baseEndpoint = process.env.REACT_APP_PROD ? 'https://mern-todo-list-backend.herokuapp.com/' : 'http://localhost:3000/';
 let endpoint = baseEndpoint;
 
 const endpointTransporter = (endpointAttach) => {
   endpoint = `${baseEndpoint}${endpointAttach}`;
-  console.log(endpoint);
 };
 
 const getTasks = async () => {
