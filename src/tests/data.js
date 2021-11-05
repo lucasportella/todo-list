@@ -4,4 +4,4 @@ const data = [
   { name: 'cccfinish college', date: '2021-11-04T18:00:22.529Z', status: 'in progress' },
 ];
 
-export default data;
+module.exports = data;
