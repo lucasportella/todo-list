@@ -47,6 +47,8 @@ describe('Test taskModel', () => {
       expect(response).to.have.lengthOf(3);
       response.forEach((task) => {
         expect(task).to.be.a('object');
+        const symbol = Reflect.ownKeys(task._id)[0];
+        expect(symbol).to.be.a('symbol');
         expect(task).to.have.all.keys('_id', 'name', 'status', 'date');
       });
     });
