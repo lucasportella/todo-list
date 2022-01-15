@@ -77,7 +77,7 @@ const EditMode = (props) => {
 EditMode.propTypes = {
   data: PropTypes.shape({
     id: PropTypes.string.isRequired,
-    text: PropTypes.string.isRequired,
+    task: PropTypes.string.isRequired,
     status: PropTypes.string.isRequired,
   }).isRequired,
 };
