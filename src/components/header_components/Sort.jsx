@@ -32,7 +32,7 @@ const Sort = () => {
     <div>
       <form>
         <select defaultValue={sortMethod} onChange={handleSortMethod} name="sort-method">
-          <option value="text">Text</option>
+          <option value="task">Task</option>
           <option value="date">Date</option>
           <option value="status">Status</option>
         </select>

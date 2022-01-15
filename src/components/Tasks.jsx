@@ -36,7 +36,7 @@ const Tasks = () => {
 
   const renderStandardMode = (task) => (
     <div key={task.id}>
-      <div>{task.text}</div>
+      <div>{task.task}</div>
       <div>{task.date}</div>
       <div>{task.status}</div>
       <button onClick={() => handleEditMode(task.id)} type="button">Edit</button>

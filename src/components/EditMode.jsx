@@ -6,7 +6,7 @@ import { fetchEditTask } from '../API/fetchAPI';
 const EditMode = (props) => {
   const {
     data: {
-      id, text, status,
+      id, task, status,
     },
   } = props;
 
@@ -14,7 +14,7 @@ const EditMode = (props) => {
     updateTasks, setAlertMessage, alertMessageReset, editModeTasks, setEditModeTasks,
   } = useContext(TasksContext);
 
-  const [editTask, setEditTask] = useState({ id, text, status });
+  const [editTask, setEditTask] = useState({ id, task, status });
 
   const handleChange = ({ target: { name, value } }) => {
     setEditTask({ ...editTask, [name]: value });
@@ -45,10 +45,18 @@ const EditMode = (props) => {
   return (
     <form>
       <div>
-        <label htmlFor="task-text">
-          Task text:
-          <input onChange={handleChange} name="text" id="task-text" value={editTask.text} />
-        </label>
+      Task:
+        <select onChange={handleChange} name="task" id="dropdown-task" value={editTask.task}>
+          <option value="check emails">Check emails</option>
+          <option value="take dog for a walk ">Take dog for a walk</option>
+          <option value="wash the dishes">Wash the dishes</option>
+          <option value="do the homework">Do the homework</option>
+          <option value="pay my debt off">Pay my debt off</option>
+          <option value="run a marathon">Run a marathon</option>
+          <option value="propose to girlfriend">Propose to girlfriend</option>
+          <option value="fix my car">Fix my car</option>
+          <option value="change light bulb">Change light bulb</option>
+        </select>
       </div>
       <div>
         Task status:
