@@ -19,8 +19,8 @@ const removeTask = async (id) => {
 
 const editTask = async (payload) => {
   const db = await connection();
-  const { id, text, status } = payload;
-  return db.collection('tasks').updateOne({ _id: ObjectId(id) }, { $set: { text, status } });
+  const { id, task, status } = payload;
+  return db.collection('tasks').updateOne({ _id: ObjectId(id) }, { $set: { task, status } });
 };
 
 // sorting case insensitive https://stackoverflow.com/questions/22931177/case-insensitive-sorting-in-mongodb

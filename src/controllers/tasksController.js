@@ -7,8 +7,8 @@ const getTasks = async (req, res) => {
 };
 
 const addTask = async (req, res) => {
-  const { text, status } = req.body;
-  const payload = { text, status };
+  const { task, status } = req.body;
+  const payload = { task, status };
   const result = await tasksService.addTask(payload);
   if (result.error) {
     return res.status(StatusCodes.BAD_REQUEST).json(result);
