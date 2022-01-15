@@ -49,7 +49,7 @@ describe('Test taskModel', () => {
         expect(task).to.be.a('object');
         const symbol = Reflect.ownKeys(task._id)[0];
         expect(symbol).to.be.a('symbol');
-        expect(task).to.have.all.keys('_id', 'name', 'status', 'date');
+        expect(task).to.have.all.keys('_id', 'task', 'status', 'date');
       });
     });
   });

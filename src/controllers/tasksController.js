@@ -26,8 +26,8 @@ const removeTask = async (req, res) => {
 };
 
 const editTask = async (req, res) => {
-  const { id, text, status } = req.body;
-  const payload = { id, text, status };
+  const { id, task, status } = req.body;
+  const payload = { id, task, status };
   const result = await tasksService.editTask(payload);
   if (result.error) {
     return res.status(StatusCodes.BAD_REQUEST).json(result);
