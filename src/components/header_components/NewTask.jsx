@@ -5,7 +5,7 @@ import TasksContext from '../../context/TasksContext';
 const NewTask = () => {
   const { updateTasks, setAlertMessage, alertMessageReset } = useContext(TasksContext);
   const [newTaskMode, setNewTaskMode] = useState(false);
-  const [newTask, setNewTask] = useState({ status: 'pending', text: '' });
+  const [newTask, setNewTask] = useState({ status: 'pending', task: 'check emails' });
 
   const handleClick = () => setNewTaskMode(!newTaskMode);
 
@@ -34,10 +34,18 @@ const NewTask = () => {
 
     <form>
       <div>
-        <label htmlFor="task-text">
-          Task text:
-          <input onChange={handleChange} name="text" id="task-text" />
-        </label>
+      Task:
+        <select onChange={handleChange} name="task" id="dropdown-task">
+          <option value="check emails">Check emails</option>
+          <option value="take dog for a walk ">Take dog for a walk</option>
+          <option value="wash the dishes">Wash the dishes</option>
+          <option value="do the homework">Do the homework</option>
+          <option value="pay my debt off">Pay my debt off</option>
+          <option value="run a marathon">Run a marathon</option>
+          <option value="propose to girlfriend">Propose to girlfriend</option>
+          <option value="fix my car">Fix my car</option>
+          <option value="change light bulb">Change light bulb</option>
+        </select>
       </div>
       <div>
         Task status:
