@@ -3,6 +3,10 @@ const tasksModel = require('../models/tasksModel');
 const getTasks = async () => tasksModel.getTasks();
 
 const addTask = async (payload) => {
+  const { task, status } = payload;
+  if (typeof (task) !== 'string' || typeof (status) !== 'string') {
+    return { error: { errorType: 'invalid request', message: 'task or status missing or invalid' } };
+  }
   const result = await tasksModel.addTask(payload);
   if (result.acknowledged) {
     return result;

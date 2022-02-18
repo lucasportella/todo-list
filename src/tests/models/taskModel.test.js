@@ -26,8 +26,6 @@ describe('Test taskModel', () => {
     await DBServer.stop();
   });
 
-  // beforeEach technique https://github1s.com/tryber/sd-09-store-manager/pull/3
-
   beforeEach(async () => {
     db = connectionMock.db('todo_list');
     await db.collection('tasks').deleteMany({});
@@ -56,7 +54,7 @@ describe('Test taskModel', () => {
 
   describe('Test addTask function', () => {
     it('successfully adds a new task', async () => {
-      const task = { name: 'Plant potatoes', status: 'pending' };
+      const task = { task: 'Plant potatoes', status: 'pending' };
       const response = await tasksModel.addTask(task);
       expect(response).to.be.a('object');
       expect(response).to.have.all.keys('acknowledged', 'insertedId');
