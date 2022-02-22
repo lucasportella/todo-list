@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 const { expect } = require('chai');
 const sinon = require('sinon');
 const { ObjectId } = require('mongodb');
@@ -70,6 +71,11 @@ describe('Test taskModel', () => {
       db.collection('tasks').insertMany(data);
     });
 
+    afterEach(async () => {
+      db = connectionMock.db('todo_list');
+      db.collection('tasks').deleteMany();
+    });
+
     it('successfully removes a task', async () => {
       const { _id } = await db.collection('tasks').findOne();
       const idString = _id.toString();
@@ -78,6 +84,20 @@ describe('Test taskModel', () => {
       expect(response).to.deep.equal({ acknowledged: true, deletedCount: 1 });
       const task = await db.collection('tasks').findOne();
       expect(task._id).to.not.equal(_id);
+    });
+
+    // uses cursor.hasNext to check if it is still iterable
+    // then check element properties with cursor.next()
+    it('successfully removes all tasks', async () => {
+      let tasks = await db.collection('tasks').find().toArray();
+      expect(tasks).to.have.lengthOf(3);
+      await Promise.all(tasks.map((task) => {
+        const idString = task._id.toString();
+        return tasksModel.removeTask(idString);
+      }));
+      tasks = await db.collection('tasks').find().toArray();
+      expect(tasks).to.be.a('array');
+      expect(tasks).to.have.lengthOf(0);
     });
   });
 });
