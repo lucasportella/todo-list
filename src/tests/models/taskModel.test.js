@@ -86,8 +86,6 @@ describe('Test taskModel', () => {
       expect(task._id).to.not.equal(_id);
     });
 
-    // uses cursor.hasNext to check if it is still iterable
-    // then check element properties with cursor.next()
     it('successfully removes all tasks', async () => {
       let tasks = await db.collection('tasks').find().toArray();
       expect(tasks).to.have.lengthOf(3);
