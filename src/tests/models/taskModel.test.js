@@ -1,7 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 const { expect } = require('chai');
 const sinon = require('sinon');
-const { ObjectId } = require('mongodb');
 const { MongoClient } = require('mongodb');
 const { MongoMemoryServer } = require('mongodb-memory-server');
 const data = require('../data');
