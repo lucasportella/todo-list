@@ -1,5 +1,6 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
+const { ObjectId } = require('mongodb');
 const { MongoClient } = require('mongodb');
 const { MongoMemoryServer } = require('mongodb-memory-server');
 const data = require('../data');
@@ -60,6 +61,23 @@ describe('Test taskModel', () => {
       expect(response).to.have.all.keys('acknowledged', 'insertedId');
       expect(response).to.include({ acknowledged: true });
       expect(response.insertedId).to.be.a('object');
+    });
+  });
+
+  describe('Test removeTask function', () => {
+    beforeEach(async () => {
+      db = connectionMock.db('todo_list');
+      db.collection('tasks').insertMany(data);
+    });
+
+    it('successfully removes a task', async () => {
+      const { _id } = await db.collection('tasks').findOne();
+      const idString = _id.toString();
+      const response = await tasksModel.removeTask(idString);
+      expect(response).to.be.a('object');
+      expect(response).to.deep.equal({ acknowledged: true, deletedCount: 1 });
+      const task = await db.collection('tasks').findOne();
+      expect(task._id).to.not.equal(_id);
     });
   });
 });
