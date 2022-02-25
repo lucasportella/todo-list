@@ -41,8 +41,8 @@ const Tasks = () => {
       <div>{task.task}</div>
       <div>{task.date}</div>
       <div>{task.status}</div>
-      <Button className="buttons" onClick={() => handleEditMode(task.id)} type="button">Edit</Button>
-      <Button className="buttons" onClick={() => handleDelete(task.id)} type="button">Remove</Button>
+      <Button size="sm" className="buttons" onClick={() => handleEditMode(task.id)} type="button">Edit</Button>
+      <Button size="sm" className="buttons" onClick={() => handleDelete(task.id)} type="button">Remove</Button>
     </Form>
   );
 

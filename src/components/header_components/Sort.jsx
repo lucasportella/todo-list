@@ -28,7 +28,7 @@ const Sort = () => {
     alertMessageReset();
   };
 
-  const renderSortButton = () => (<div><Button type="button" onClick={handleSortMode}>Sort</Button></div>);
+  const renderSortButton = () => (<div><Button size="sm" type="button" onClick={handleSortMode}>Sort</Button></div>);
 
   const renderSortMode = () => (
     <Form>
@@ -61,8 +61,8 @@ const Sort = () => {
             id="desc-sort-order"
           />
         </Form.Label>
-        <Button type="button" onClick={handleSort}>Sort</Button>
-        <Button type="button" onClick={handleSortMode}>Cancel</Button>
+        <Button size="sm" type="button" onClick={handleSort}>Sort</Button>
+        <Button size="sm" type="button" onClick={handleSortMode}>Cancel</Button>
       </Form>
     </Form>
   );

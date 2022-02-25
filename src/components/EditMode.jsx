@@ -4,6 +4,7 @@ import TasksContext from '../context/TasksContext';
 import { fetchEditTask } from '../API/fetchAPI';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import {Row, Col, Container } from 'react-bootstrap';
 
 const EditMode = (props) => {
   const {
@@ -45,6 +46,7 @@ const EditMode = (props) => {
   };
 
   return (
+    <div className='editTask'>
     <Form>
       <div>
       Task:
@@ -62,17 +64,20 @@ const EditMode = (props) => {
       </div>
       <div>
         Task status:
+
         <Form.Control as="select" onChange={handleChange} name="status" id="dropdown-status" value={editTask.status}>
           <option value="pending">Pending</option>
           <option value="in progress">In progress</option>
           <option value="done">Done</option>
         </Form.Control>
+
       </div>
       <span>
-        <Button className="buttons" type="button" onClick={confirmEdit}>Confirm</Button>
-        <Button className="buttons" type="button" onClick={cancelEdit}>Cancel</Button>
+        <Button size="sm" className="buttons" type="button" onClick={confirmEdit}>Confirm</Button>
+        <Button size="sm" className="buttons" type="button" onClick={cancelEdit}>Cancel</Button>
       </span>
     </Form>
+    </div>
   );
 };
 

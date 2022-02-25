@@ -29,7 +29,7 @@ const NewTask = () => {
   };
 
   const renderNewTaskButton = () => (
-    <span><Button type="button" onClick={handleClick}>New Task</Button></span>
+    <span><Button size="sm" type="button" onClick={handleClick}>New Task</Button></span>
   );
 
   const renderNewTaskMode = () => (
