@@ -1,6 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { endpointTransporter } from '../../API/fetchAPI';
 import TasksContext from '../../context/TasksContext';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 const Sort = () => {
   const { updateTasks, setAlertMessage, alertMessageReset } = useContext(TasksContext);
@@ -26,21 +28,20 @@ const Sort = () => {
     alertMessageReset();
   };
 
-  const renderSortButton = () => (<div><button type="button" onClick={handleSortMode}>Sort</button></div>);
+  const renderSortButton = () => (<div><Button type="button" onClick={handleSortMode}>Sort</Button></div>);
 
   const renderSortMode = () => (
-    <div>
-      <form>
-        <select defaultValue={sortMethod} onChange={handleSortMethod} name="sort-method">
+    <Form>
+        <Form.Control as="select"defaultValue={sortMethod} onChange={handleSortMethod} name="sort-method">
           <option value="task">Task</option>
           <option value="date">Date</option>
           <option value="status">Status</option>
-        </select>
-      </form>
-      <form>
-        <label htmlFor="asc-sort-order">
+        </Form.Control>
+
+      <Form>
+        <Form.Label htmlFor="asc-sort-order">
           Asc
-          <input
+          <Form.Check
             onClick={handleSortOrder}
             type="radio"
             value="1"
@@ -48,10 +49,10 @@ const Sort = () => {
             name="sort-order"
             id="asc-sort-order"
           />
-        </label>
-        <label htmlFor="desc-sort-order">
+        </Form.Label>
+        <Form.Label htmlFor="desc-sort-order">
           Desc
-          <input
+          <Form.Check
             onClick={handleSortOrder}
             type="radio"
             value="-1"
@@ -59,15 +60,15 @@ const Sort = () => {
             name="sort-order"
             id="desc-sort-order"
           />
-        </label>
-        <button type="button" onClick={handleSort}>Sort</button>
-        <button type="button" onClick={handleSortMode}>Cancel</button>
-      </form>
-    </div>
+        </Form.Label>
+        <Button type="button" onClick={handleSort}>Sort</Button>
+        <Button type="button" onClick={handleSortMode}>Cancel</Button>
+      </Form>
+    </Form>
   );
 
   return (
-    <div>
+    <div className="buttonHolder">
       {sortMode ? renderSortMode() : renderSortButton()}
     </div>
   );

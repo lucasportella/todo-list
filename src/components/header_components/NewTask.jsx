@@ -1,6 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { postTask } from '../../API/fetchAPI';
 import TasksContext from '../../context/TasksContext';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 const NewTask = () => {
   const { updateTasks, setAlertMessage, alertMessageReset } = useContext(TasksContext);
@@ -27,15 +29,15 @@ const NewTask = () => {
   };
 
   const renderNewTaskButton = () => (
-    <span><button type="button" onClick={handleClick}>New Task</button></span>
+    <span><Button type="button" onClick={handleClick}>New Task</Button></span>
   );
 
   const renderNewTaskMode = () => (
 
-    <form>
-      <div>
+    <div>
+      <Form.Group>
       Task:
-        <select onChange={handleChange} name="task" id="dropdown-task">
+        <Form.Control as="select" onChange={handleChange} name="task" id="dropdown-task">
           <option value="check emails">Check emails</option>
           <option value="take dog for a walk ">Take dog for a walk</option>
           <option value="wash the dishes">Wash the dishes</option>
@@ -45,26 +47,26 @@ const NewTask = () => {
           <option value="propose to girlfriend">Propose to girlfriend</option>
           <option value="fix my car">Fix my car</option>
           <option value="change light bulb">Change light bulb</option>
-        </select>
-      </div>
+        </Form.Control>
+      </Form.Group>
       <div>
         Task status:
-        <select onChange={handleChange} name="status" id="dropdown-status">
+        <Form.Control as="select" onChange={handleChange} name="status" id="dropdown-status">
           <option value="pending">Pending</option>
           <option value="in progress">In progress</option>
           <option value="done">Done</option>
-        </select>
+        </Form.Control>
       </div>
       <span>
-        <button type="button" onClick={handleClickAndSubmit}>Confirm</button>
-        <button type="button" onClick={handleClick}>Cancel</button>
+        <Button type="button" onClick={handleClickAndSubmit}>Confirm</Button>
+        <Button type="button" onClick={handleClick}>Cancel</Button>
       </span>
-    </form>
+    </div>
 
   );
 
   return (
-    <div>
+    <div className="buttonHolder">
       {newTaskMode ? renderNewTaskMode() : renderNewTaskButton()}
     </div>
   );

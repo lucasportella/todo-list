@@ -2,6 +2,8 @@ import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import TasksContext from '../context/TasksContext';
 import { fetchEditTask } from '../API/fetchAPI';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 const EditMode = (props) => {
   const {
@@ -43,10 +45,10 @@ const EditMode = (props) => {
   };
 
   return (
-    <form>
+    <Form>
       <div>
       Task:
-        <select onChange={handleChange} name="task" id="dropdown-task" value={editTask.task}>
+        <Form.Control as="select" onChange={handleChange} name="task" id="dropdown-task" value={editTask.task}>
           <option value="check emails">Check emails</option>
           <option value="take dog for a walk ">Take dog for a walk</option>
           <option value="wash the dishes">Wash the dishes</option>
@@ -56,21 +58,21 @@ const EditMode = (props) => {
           <option value="propose to girlfriend">Propose to girlfriend</option>
           <option value="fix my car">Fix my car</option>
           <option value="change light bulb">Change light bulb</option>
-        </select>
+        </Form.Control>
       </div>
       <div>
         Task status:
-        <select onChange={handleChange} name="status" id="dropdown-status" value={editTask.status}>
+        <Form.Control as="select" onChange={handleChange} name="status" id="dropdown-status" value={editTask.status}>
           <option value="pending">Pending</option>
           <option value="in progress">In progress</option>
           <option value="done">Done</option>
-        </select>
+        </Form.Control>
       </div>
       <span>
-        <button type="button" onClick={confirmEdit}>Confirm</button>
-        <button type="button" onClick={cancelEdit}>Cancel</button>
+        <Button className="buttons" type="button" onClick={confirmEdit}>Confirm</Button>
+        <Button className="buttons" type="button" onClick={cancelEdit}>Cancel</Button>
       </span>
-    </form>
+    </Form>
   );
 };
 

@@ -2,6 +2,8 @@ import React, { useEffect, useContext } from 'react';
 import { removeTask } from '../API/fetchAPI';
 import TasksContext from '../context/TasksContext';
 import EditMode from './EditMode';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 const Tasks = () => {
   const {
@@ -35,20 +37,20 @@ const Tasks = () => {
   };
 
   const renderStandardMode = (task) => (
-    <div key={task.id}>
+    <Form key={task.id} className="Task">
       <div>{task.task}</div>
       <div>{task.date}</div>
       <div>{task.status}</div>
-      <button onClick={() => handleEditMode(task.id)} type="button">Edit</button>
-      <button onClick={() => handleDelete(task.id)} type="button">Remove</button>
-    </div>
+      <Button className="buttons" onClick={() => handleEditMode(task.id)} type="button">Edit</Button>
+      <Button className="buttons" onClick={() => handleDelete(task.id)} type="button">Remove</Button>
+    </Form>
   );
 
   const generateTasks = () => tasks.map((task) => (editModeTasks.includes(task.id)
     ? <EditMode data={task} key={task.id} /> : renderStandardMode(task)));
 
   return (
-    <div>
+    <div className="tasksFather">
       <div>{alertMessage}</div>
       {tasks ? generateTasks() : <div>Loading...</div>}
     </div>
