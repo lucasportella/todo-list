@@ -34,4 +34,7 @@
   flex-direction: column;
   justify-content: center;
 }
-
+.btn {
+  margin: 3px;
+  margin-bottom: 5px;
+}

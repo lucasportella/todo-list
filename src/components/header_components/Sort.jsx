@@ -61,8 +61,10 @@ const Sort = () => {
             id="desc-sort-order"
           />
         </Form.Label>
+        <div className= 'btn'>
         <Button size="sm" type="button" onClick={handleSort}>Sort</Button>
         <Button size="sm" type="button" onClick={handleSortMode}>Cancel</Button>
+        </div>
       </Form>
     </Form>
   );
