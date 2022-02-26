@@ -31,42 +31,49 @@ function Sort() {
   const renderSortButton = () => (<div><Button size="sm" type="button" onClick={handleSortMode}>Sort</Button></div>);
 
   const renderSortMode = () => (
-    <Form>
-      <Form.Control as="select" defaultValue={sortMethod} onChange={handleSortMethod} name="sort-method">
-        <option value="task">Task</option>
-        <option value="date">Date</option>
-        <option value="status">Status</option>
-      </Form.Control>
-
+    <div className="newTaskAndHeader">
       <Form>
-        <Form.Label htmlFor="asc-sort-order">
-          Asc
-          <Form.Check
-            onClick={handleSortOrder}
-            type="radio"
-            value="1"
-            defaultChecked={sortOrder === '1'}
-            name="sort-order"
-            id="asc-sort-order"
-          />
-        </Form.Label>
-        <Form.Label htmlFor="desc-sort-order">
-          Desc
-          <Form.Check
-            onClick={handleSortOrder}
-            type="radio"
-            value="-1"
-            defaultChecked={sortOrder === '-1'}
-            name="sort-order"
-            id="desc-sort-order"
-          />
-        </Form.Label>
-        <div className="btn">
-          <Button size="sm" type="button" onClick={handleSort}>Sort</Button>
-          <Button size="sm" type="button" onClick={handleSortMode}>Cancel</Button>
-        </div>
+        <h5>Task</h5>
+        <Form.Control as="select" defaultValue={sortMethod} onChange={handleSortMethod} name="sort-method">
+          <option value="task">Task</option>
+          <option value="date">Date</option>
+          <option value="status">Status</option>
+        </Form.Control>
+
+        <Form>
+          <div className="ascDesc">
+            <Form.Label htmlFor="asc-sort-order">
+              Asc
+              <Form.Check
+                onClick={handleSortOrder}
+                type="radio"
+                value="1"
+                defaultChecked={sortOrder === '1'}
+                name="sort-order"
+                id="asc-sort-order"
+              />
+            </Form.Label>
+          </div>
+          <div className="ascDesc">
+            <Form.Label htmlFor="desc-sort-order">
+              Desc
+              <Form.Check
+                onClick={handleSortOrder}
+                type="radio"
+                value="-1"
+                defaultChecked={sortOrder === '-1'}
+                name="sort-order"
+                id="desc-sort-order"
+              />
+            </Form.Label>
+          </div>
+          <div className="btn">
+            <Button size="sm" type="button" onClick={handleSort}>Sort</Button>
+            <Button size="sm" type="button" onClick={handleSortMode}>Cancel</Button>
+          </div>
+        </Form>
       </Form>
-    </Form>
+    </div>
   );
 
   return (

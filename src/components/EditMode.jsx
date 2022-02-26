@@ -48,7 +48,7 @@ function EditMode(props) {
     <div className="editTask">
       <Form>
         <div>
-          Task:
+          <h5 className="taskAndStatus">Task</h5>
           <Form.Control as="select" onChange={handleChange} name="task" id="dropdown-task" value={editTask.task}>
             <option value="check emails">Check emails</option>
             <option value="take dog for a walk ">Take dog for a walk</option>
@@ -62,7 +62,7 @@ function EditMode(props) {
           </Form.Control>
         </div>
         <div>
-          Task status:
+          <h5 className="taskAndStatus">Task status</h5>
 
           <Form.Control as="select" onChange={handleChange} name="status" id="dropdown-status" value={editTask.status}>
             <option value="pending">Pending</option>

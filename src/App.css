@@ -1,3 +1,7 @@
+select {
+  text-align: center;
+}
+
 .App {
   text-align: center;
 }
@@ -27,6 +31,7 @@
 .subheader {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .tasksFather {
@@ -37,4 +42,23 @@
 .btn {
   margin: 3px;
   margin-bottom: 5px;
+}
+
+.newTaskAndHeader {
+  padding: 5px;
+}
+
+.ascDesc {
+  display: inline;
+  padding: 2px;
+}
+
+.buttonHolder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.taskAndStatus {
+  margin-top: 5px;
 }

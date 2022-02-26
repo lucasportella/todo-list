@@ -40,9 +40,9 @@ function NewTask() {
   );
 
   const renderNewTaskMode = () => (
-    <div>
+    <div className="newTaskAndHeader">
       <Form.Group>
-        Task:
+        <h5>Task</h5>
         <Form.Control
           as="select"
           onChange={handleChange}
@@ -61,7 +61,7 @@ function NewTask() {
         </Form.Control>
       </Form.Group>
       <div>
-        Task status:
+        <h6 className="taskAndStatus">Task status</h6>
         <Form.Control
           as="select"
           onChange={handleChange}
