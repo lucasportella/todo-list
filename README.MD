@@ -16,4 +16,4 @@ The user interface was built with React. React hooks and Context API was used as
 
 Finally, for deploy, Heroku and MongoDB Atlas were used.
 
-Tests and CSS under construction.
+Tests under construction.
