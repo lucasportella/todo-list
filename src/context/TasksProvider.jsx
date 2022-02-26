@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import TasksContext from './TasksContext';
 import { getTasks } from '../API/fetchAPI';
 
-const TasksProvider = ({ children }) => {
+function TasksProvider({ children }) {
   const [tasks, setTasks] = useState();
   const [editModeTasks, setEditModeTasks] = useState([]);
   const [alertMessage, setAlertMessage] = useState('');
@@ -29,13 +29,14 @@ const TasksProvider = ({ children }) => {
     setAlertMessage,
     alertMessageReset,
   };
+  const memoContextValues = useMemo(() => contextValue, [contextValue]);
 
   return (
-    <TasksContext.Provider value={contextValue}>
+    <TasksContext.Provider value={memoContextValues}>
       {children}
     </TasksContext.Provider>
   );
-};
+}
 
 TasksProvider.propTypes = {
   children: PropTypes.node.isRequired,

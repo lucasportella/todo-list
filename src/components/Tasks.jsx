@@ -1,11 +1,11 @@
 import React, { useEffect, useContext } from 'react';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 import { removeTask } from '../API/fetchAPI';
 import TasksContext from '../context/TasksContext';
 import EditMode from './EditMode';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
 
-const Tasks = () => {
+function Tasks() {
   const {
     updateTasks,
     tasks,
@@ -55,6 +55,6 @@ const Tasks = () => {
       {tasks ? generateTasks() : <div>Loading...</div>}
     </div>
   );
-};
+}
 
 export default Tasks;

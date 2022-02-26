@@ -1,16 +1,15 @@
-import React, { useState, useContext } from "react";
-import { postTask } from "../../API/fetchAPI";
-import TasksContext from "../../context/TasksContext";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+import React, { useState, useContext } from 'react';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import { postTask } from '../../API/fetchAPI';
+import TasksContext from '../../context/TasksContext';
 
-const NewTask = () => {
-  const { updateTasks, setAlertMessage, alertMessageReset } =
-    useContext(TasksContext);
+function NewTask() {
+  const { updateTasks, setAlertMessage, alertMessageReset } = useContext(TasksContext);
   const [newTaskMode, setNewTaskMode] = useState(false);
   const [newTask, setNewTask] = useState({
-    status: "pending",
-    task: "check emails",
+    status: 'pending',
+    task: 'check emails',
   });
 
   const handleClick = () => setNewTaskMode(!newTaskMode);
@@ -22,10 +21,10 @@ const NewTask = () => {
   const handleClickAndSubmit = async () => {
     try {
       await postTask(newTask);
-      setAlertMessage("New task created!");
+      setAlertMessage('New task created!');
       await updateTasks();
     } catch (error) {
-      setAlertMessage("Failed to create new task.");
+      setAlertMessage('Failed to create new task.');
     } finally {
       setNewTaskMode(!newTaskMode);
       alertMessageReset();
@@ -90,6 +89,6 @@ const NewTask = () => {
       {newTaskMode ? renderNewTaskMode() : renderNewTaskButton()}
     </div>
   );
-};
+}
 
 export default NewTask;

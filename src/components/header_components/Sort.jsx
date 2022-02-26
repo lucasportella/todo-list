@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react';
-import { endpointTransporter } from '../../API/fetchAPI';
-import TasksContext from '../../context/TasksContext';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { endpointTransporter } from '../../API/fetchAPI';
+import TasksContext from '../../context/TasksContext';
 
-const Sort = () => {
+function Sort() {
   const { updateTasks, setAlertMessage, alertMessageReset } = useContext(TasksContext);
   const [sortMode, setSortMode] = useState(false);
   const [sortMethod, setSortMethod] = useState('date');
@@ -32,11 +32,11 @@ const Sort = () => {
 
   const renderSortMode = () => (
     <Form>
-        <Form.Control as="select"defaultValue={sortMethod} onChange={handleSortMethod} name="sort-method">
-          <option value="task">Task</option>
-          <option value="date">Date</option>
-          <option value="status">Status</option>
-        </Form.Control>
+      <Form.Control as="select" defaultValue={sortMethod} onChange={handleSortMethod} name="sort-method">
+        <option value="task">Task</option>
+        <option value="date">Date</option>
+        <option value="status">Status</option>
+      </Form.Control>
 
       <Form>
         <Form.Label htmlFor="asc-sort-order">
@@ -61,9 +61,9 @@ const Sort = () => {
             id="desc-sort-order"
           />
         </Form.Label>
-        <div className= 'btn'>
-        <Button size="sm" type="button" onClick={handleSort}>Sort</Button>
-        <Button size="sm" type="button" onClick={handleSortMode}>Cancel</Button>
+        <div className="btn">
+          <Button size="sm" type="button" onClick={handleSort}>Sort</Button>
+          <Button size="sm" type="button" onClick={handleSortMode}>Cancel</Button>
         </div>
       </Form>
     </Form>
@@ -74,6 +74,6 @@ const Sort = () => {
       {sortMode ? renderSortMode() : renderSortButton()}
     </div>
   );
-};
+}
 
 export default Sort;
