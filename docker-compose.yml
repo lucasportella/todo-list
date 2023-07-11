@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  server:
+    container_name: backend
+    build: './backend-prod'
+    volumes:
+      - ./:/backend-todo-list
+      - ./node_modules:/backend-todo-list/node_modules
+    environment:
+      NODE_ENV: development
+    depends_on:
+      - db
+    ports:
+      - '3001:3001'
+    networks:
+      - net1
+
+  db:
+    image: 'mongo'
+    container_name: mongodb
+    environment:
+      MONGO_INITDB_DATABASE: todo_list
+    ports:
+      - '27017:27017'
+    volumes:
+      - ./data/db:/data/db
+    networks:
+      - net1
+networks:
+ net1:
